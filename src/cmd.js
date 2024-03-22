@@ -7,6 +7,22 @@ const rl = readline.createInterface({
   output: process.stdout,
 });
 
+// Function to prompt user for choice
+export const promptForChoice = () => {
+  return new Promise((resolve) => {
+    // Displaying options for user
+    console.log("Options:");
+    console.log("1. Filter from all vehicles");
+    console.log("2. Filter for expensive vehicle");
+    console.log("3. Filter for inexpensive vehicle");
+    // Prompting user for choice
+    rl.question("Enter your choice: ", (choice) => {
+      // Resolving with user choice
+      resolve(choice);
+    });
+  });
+};
+
 // Function to prompt user for a value corresponding to the given question
 const promptForValue = (question) =>
   new Promise((resolve) =>
@@ -15,14 +31,6 @@ const promptForValue = (question) =>
       resolve(answer.trim() || undefined)
     )
   );
-
-// Function to prompt user for a budget
-export const promptForBudget = async (question) => {
-  // Prompting user for a budget value
-  const budget = await promptForValue(question);
-  // Parsing the budget value to float and returning
-  return parseFloat(budget);
-};
 
 // Function to prompt user for filter values
 export const enterValues = async () => {
@@ -68,18 +76,12 @@ export const promptForYesOrNo = () =>
     });
   });
 
-// Function to prompt user for choice
-export const promptForChoice = () => {
-  return new Promise((resolve) => {
-    // Displaying options for user
-    console.log("Options:");
-    console.log("1. Filter from all vehicles");
-    console.log("2. Filter for expensive vehicle");
-    console.log("3. Filter for inexpensive vehicle");
-    // Prompting user for choice
-    rl.question("Enter your choice: ", (choice) => {
-      // Resolving with user choice
-      resolve(choice);
-    });
-  });
+  // Function to prompt user for a budget
+export const promptForBudget = async (question) => {
+  // Prompting user for a budget value
+  const budget = await promptForValue(question);
+  // Parsing the budget value to float and returning
+  return parseFloat(budget);
 };
+
+
